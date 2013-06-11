@@ -23,7 +23,7 @@ func checkFlags(t *testing.T) {
 
 func TestText(t *testing.T) {
 	checkFlags(t)
-	_, err := SendEmail(from, to, "amzses text test", textBody)
+	_, err := EnvConfig.SendEmail(from, to, "amzses text test", textBody)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -31,7 +31,7 @@ func TestText(t *testing.T) {
 
 func TestHtml(t *testing.T) {
 	checkFlags(t)
-	_, err := SendEmailHTML(from, to, "amzses html test", textBody, htmlBody)
+	_, err := EnvConfig.SendEmailHTML(from, to, "amzses html test", textBody, htmlBody)
 	if err != nil {
 		t.Fatal(err)
 	}
