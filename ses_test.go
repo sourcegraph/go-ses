@@ -1,4 +1,4 @@
-package amzses
+package ses
 
 import (
 	"flag"
@@ -8,20 +8,17 @@ import (
 var to, from string
 
 func init() {
-	flag.StringVar(&to, "to", "", "email recipient")
+	flag.StringVar(&to, "to", "success@simulator.amazonses.com", "email recipient")
 	flag.StringVar(&from, "from", "", "email sender")
 }
 
 func checkFlags(t *testing.T) {
-	if len(to) == 0 {
-		t.Fatal("must specify recipient via -to flag.")
-	}
 	if len(from) == 0 {
 		t.Fatal("must specify sender via -from flag.")
 	}
 }
 
-func TestText(t *testing.T) {
+func TestSendEmail(t *testing.T) {
 	checkFlags(t)
 	_, err := EnvConfig.SendEmail(from, to, "amzses text test", textBody)
 	if err != nil {
@@ -29,7 +26,7 @@ func TestText(t *testing.T) {
 	}
 }
 
-func TestHtml(t *testing.T) {
+func TestSendEmailHTML(t *testing.T) {
 	checkFlags(t)
 	_, err := EnvConfig.SendEmailHTML(from, to, "amzses html test", textBody, htmlBody)
 	if err != nil {
