@@ -35,7 +35,7 @@ func init() {
 	secretKey = config.GetString("aws_secret_key")
 }
 
-func SendMail(from, to, subject, body string) (string, error) {
+func SendEmail(from, to, subject, body string) (string, error) {
 	data := make(url.Values)
 	data.Add("Action", "SendEmail")
 	data.Add("Source", from)
@@ -47,7 +47,7 @@ func SendMail(from, to, subject, body string) (string, error) {
 	return sesPost(data)
 }
 
-func SendMailHTML(from, to, subject, bodyText, bodyHTML string) (string, error) {
+func SendEmailHTML(from, to, subject, bodyText, bodyHTML string) (string, error) {
 	data := make(url.Values)
 	data.Add("Action", "SendEmail")
 	data.Add("Source", from)
