@@ -11,9 +11,9 @@ Note: the public API is experimental and subject to change until further notice.
 Usage
 =====
 
-Documentation: [go-ses on Sourcegraph](https://sourcegraph.com/repos/github.com/sourcegraph/go-ses).
+Documentation: [go-ses on Sourcegraph](https://sourcegraph.com/github.com/sourcegraph/go-ses).
 
-Example: [example_test.go](https://github.com/sourcegraph/go-ses/blob/master/example_test.go) ([SourceGraph](https://sourcegraph.com/repos/github.com/sourcegraph/go-ses/tree/master/example_test.go)):
+Example: [example_test.go](https://github.com/sourcegraph/go-ses/blob/master/example_test.go) ([Sourcegraph](https://sourcegraph.com/github.com/sourcegraph/go-ses/tree/master/example_test.go)):
 
 ```go
 package ses_test
