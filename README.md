@@ -1,6 +1,12 @@
 go-ses - send email using Amazon AWS Simple Email Service
 =========================================================
 
+[![xrefs](https://sourcegraph.com/api/repos/github.com/sourcegraph/go-ses/badges/xrefs.png)](https://sourcegraph.com/github.com/sourcegraph/go-ses)
+[![funcs](https://sourcegraph.com/api/repos/github.com/sourcegraph/go-ses/badges/funcs.png)](https://sourcegraph.com/github.com/sourcegraph/go-ses)
+[![top func](https://sourcegraph.com/api/repos/github.com/sourcegraph/go-ses/badges/top-func.png)](https://sourcegraph.com/github.com/sourcegraph/go-ses)
+[![library users](https://sourcegraph.com/api/repos/github.com/sourcegraph/go-ses/badges/library-users.png)](https://sourcegraph.com/github.com/sourcegraph/go-ses)
+[![status](https://sourcegraph.com/api/repos/github.com/sourcegraph/go-ses/badges/status.png)](https://sourcegraph.com/github.com/sourcegraph/go-ses)
+
 go-ses is an API client library for Amazon AWS [Simple Email Service
 (SES)](http://aws.amazon.com/ses/). It is a fork of Patrick Crosby's
 [stathat/amzses](https://github.com/stathat/amzses).
