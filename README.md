@@ -35,7 +35,7 @@ func Example() {
 	to := "success@simulator.amazonses.com"
 
 	// EnvConfig uses the AWS credentials in the environment variables $AWS_ACCESS_KEY_ID and
-	// $AWS_SECRET_ACCESS_KEY.
+	// $AWS_SECRET_KEY.
 	res, err := ses.EnvConfig.SendEmail(from, to, "Hello, world!", "Here is the message body.")
 	if err == nil {
 		fmt.Printf("Sent email: %s...\n", res[:32])
@@ -52,7 +52,7 @@ func Example() {
 Running tests
 =============
 
-1. Set the environment variables `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY`.
+1. Set the environment variables `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_KEY`.
 2. Run `go test -from=user@example.com`, where `user@example.com` is a sender address that is verified
    in your Amazon SES account.
 

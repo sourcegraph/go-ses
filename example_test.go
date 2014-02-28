@@ -2,6 +2,7 @@ package ses_test
 
 import (
 	"fmt"
+
 	"github.com/sourcegraph/go-ses"
 )
 
@@ -11,7 +12,7 @@ func Example() {
 	to := "success@simulator.amazonses.com"
 
 	// EnvConfig uses the AWS credentials in the environment variables $AWS_ACCESS_KEY_ID and
-	// $AWS_SECRET_ACCESS_KEY.
+	// $AWS_SECRET_KEY.
 	res, err := ses.EnvConfig.SendEmail(from, to, "Hello, world!", "Here is the message body.")
 	if err == nil {
 		fmt.Printf("Sent email: %s...\n", res[:32])

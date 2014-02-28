@@ -33,10 +33,10 @@ type Config struct {
 }
 
 // EnvConfig takes the access key ID and secret access key values from the environment variables
-// $AWS_ACCESS_KEY_ID and $AWS_SECRET_ACCESS_KEY, respectively.
+// $AWS_ACCESS_KEY_ID and $AWS_SECRET_KEY, respectively.
 var EnvConfig = Config{
 	AccessKeyID:     os.Getenv("AWS_ACCESS_KEY_ID"),
-	SecretAccessKey: os.Getenv("AWS_SECRET_ACCESS_KEY"),
+	SecretAccessKey: os.Getenv("AWS_SECRET_KEY"),
 }
 
 func (c *Config) SendEmail(from, to, subject, body string) (string, error) {
