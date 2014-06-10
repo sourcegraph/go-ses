@@ -1,6 +1,7 @@
 package ses
 
 import (
+    "fmt"
 	"flag"
 	"testing"
 )
@@ -29,6 +30,26 @@ func TestSendEmail(t *testing.T) {
 func TestSendEmailHTML(t *testing.T) {
 	checkFlags(t)
 	_, err := EnvConfig.SendEmailHTML(from, to, "amzses html test", textBody, htmlBody)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestSendRawEmail(t *testing.T) {
+	checkFlags(t)
+    raw := `To: %s
+From: %s
+Subject: amzses raw test
+Content-Type: multipart/mixed; boundary="_003_97DCB304C5294779BEBCFC8357FCC4D2"
+MIME-Version: 1.0
+
+--_003_97DCB304C5294779BEBCFC8357FCC4D2
+Content-Type: text/plain;
+
+%s
+--_003_97DCB304C5294779BEBCFC8357FCC4D2`
+
+	_, err := EnvConfig.SendRawEmail([]byte(fmt.Sprintf(raw, to, from, textBody)))
 	if err != nil {
 		t.Fatal(err)
 	}
