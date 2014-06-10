@@ -65,9 +65,9 @@ func (c *Config) SendEmailHTML(from, to, subject, bodyText, bodyHTML string) (st
 }
 
 func (c *Config) SendRawEmail(raw []byte) (string, error) {
-    data := make(url.Values)
-    data.Add("Action", "SendRawEmail")
-    data.Add("RawMessage.Data", base64.StdEncoding.EncodeToString(raw))
+	data := make(url.Values)
+	data.Add("Action", "SendRawEmail")
+	data.Add("RawMessage.Data", base64.StdEncoding.EncodeToString(raw))
 	data.Add("AWSAccessKeyId", c.AccessKeyID)
 
 	return sesPost(data, c.AccessKeyID, c.SecretAccessKey)

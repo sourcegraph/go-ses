@@ -1,8 +1,8 @@
 package ses
 
 import (
-    "fmt"
 	"flag"
+	"fmt"
 	"testing"
 )
 
@@ -37,7 +37,7 @@ func TestSendEmailHTML(t *testing.T) {
 
 func TestSendRawEmail(t *testing.T) {
 	checkFlags(t)
-    raw := `To: %s
+	raw := `To: %s
 From: %s
 Subject: amzses raw test
 Content-Type: multipart/mixed; boundary="_003_97DCB304C5294779BEBCFC8357FCC4D2"
