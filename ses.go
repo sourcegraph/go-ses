@@ -64,6 +64,15 @@ func (c *Config) SendEmailHTML(from, to, subject, bodyText, bodyHTML string) (st
 	return sesPost(data, c.AccessKeyID, c.SecretAccessKey)
 }
 
+func (c *Config) SendRawEmail(raw []byte) (string, error) {
+	data := make(url.Values)
+	data.Add("Action", "SendRawEmail")
+	data.Add("RawMessage.Data", base64.StdEncoding.EncodeToString(raw))
+	data.Add("AWSAccessKeyId", c.AccessKeyID)
+
+	return sesPost(data, c.AccessKeyID, c.SecretAccessKey)
+}
+
 func authorizationHeader(date, accessKeyID, secretAccessKey string) []string {
 	h := hmac.New(sha256.New, []uint8(secretAccessKey))
 	h.Write([]uint8(date))
