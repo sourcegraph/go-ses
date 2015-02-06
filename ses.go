@@ -19,12 +19,11 @@ import (
 	"time"
 )
 
-const (
-	endpoint = "https://email.us-east-1.amazonaws.com"
-)
-
 // Config specifies configuration options and credentials for accessing Amazon SES.
 type Config struct {
+	// Endpoint is the AWS endpoint to use for requests.
+	Endpoint string
+
 	// AccessKeyID is your Amazon AWS access key ID.
 	AccessKeyID string
 
@@ -35,6 +34,7 @@ type Config struct {
 // EnvConfig takes the access key ID and secret access key values from the environment variables
 // $AWS_ACCESS_KEY_ID and $AWS_SECRET_KEY, respectively.
 var EnvConfig = Config{
+	Endpoint:        "https://email.us-east-1.amazonaws.com",
 	AccessKeyID:     os.Getenv("AWS_ACCESS_KEY_ID"),
 	SecretAccessKey: os.Getenv("AWS_SECRET_KEY"),
 }
@@ -48,7 +48,7 @@ func (c *Config) SendEmail(from, to, subject, body string) (string, error) {
 	data.Add("Message.Body.Text.Data", body)
 	data.Add("AWSAccessKeyId", c.AccessKeyID)
 
-	return sesPost(data, c.AccessKeyID, c.SecretAccessKey)
+	return sesPost(data, c.Endpoint, c.AccessKeyID, c.SecretAccessKey)
 }
 
 func (c *Config) SendEmailHTML(from, to, subject, bodyText, bodyHTML string) (string, error) {
@@ -61,7 +61,7 @@ func (c *Config) SendEmailHTML(from, to, subject, bodyText, bodyHTML string) (st
 	data.Add("Message.Body.Html.Data", bodyHTML)
 	data.Add("AWSAccessKeyId", c.AccessKeyID)
 
-	return sesPost(data, c.AccessKeyID, c.SecretAccessKey)
+	return sesPost(data, c.Endpoint, c.AccessKeyID, c.SecretAccessKey)
 }
 
 func (c *Config) SendRawEmail(raw []byte) (string, error) {
@@ -70,7 +70,7 @@ func (c *Config) SendRawEmail(raw []byte) (string, error) {
 	data.Add("RawMessage.Data", base64.StdEncoding.EncodeToString(raw))
 	data.Add("AWSAccessKeyId", c.AccessKeyID)
 
-	return sesPost(data, c.AccessKeyID, c.SecretAccessKey)
+	return sesPost(data, c.Endpoint, c.AccessKeyID, c.SecretAccessKey)
 }
 
 func authorizationHeader(date, accessKeyID, secretAccessKey string) []string {
@@ -81,7 +81,7 @@ func authorizationHeader(date, accessKeyID, secretAccessKey string) []string {
 	return []string{auth}
 }
 
-func sesGet(data url.Values, accessKeyID, secretAccessKey string) (string, error) {
+func sesGet(data url.Values, endpoint, accessKeyID, secretAccessKey string) (string, error) {
 	urlstr := fmt.Sprintf("%s?%s", endpoint, data.Encode())
 	endpointURL, _ := url.Parse(urlstr)
 	headers := map[string][]string{}
@@ -125,7 +125,7 @@ func sesGet(data url.Values, accessKeyID, secretAccessKey string) (string, error
 	return string(resultbody), nil
 }
 
-func sesPost(data url.Values, accessKeyID, secretAccessKey string) (string, error) {
+func sesPost(data url.Values, endpoint, accessKeyID, secretAccessKey string) (string, error) {
 	body := strings.NewReader(data.Encode())
 	req, err := http.NewRequest("POST", endpoint, body)
 	if err != nil {
