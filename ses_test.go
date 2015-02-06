@@ -1,7 +1,12 @@
+// Copyright 2013 SourceGraph, Inc.
+// Copyright 2011-2013 Numrotron Inc.
+// Use of this source code is governed by an MIT-style license
+// that can be found in the LICENSE file.
+
 package ses
 
 import (
-    "encoding/base64"
+	"encoding/base64"
 	"flag"
 	"fmt"
 	"testing"
@@ -38,7 +43,7 @@ func TestSendEmailHTML(t *testing.T) {
 
 func TestSendRawEmail(t *testing.T) {
 	checkFlags(t)
-    attachment := base64.StdEncoding.EncodeToString([]byte(textBody))
+	attachment := base64.StdEncoding.EncodeToString([]byte(textBody))
 	raw := `To: %s
 From: %s
 Subject: amzses raw test

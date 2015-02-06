@@ -2,6 +2,7 @@
 // Copyright 2011-2013 Numrotron Inc.
 // Use of this source code is governed by an MIT-style license
 // that can be found in the LICENSE file.
+
 package ses
 
 import (
@@ -39,6 +40,8 @@ var EnvConfig = Config{
 	SecretAccessKey: os.Getenv("AWS_SECRET_KEY"),
 }
 
+// SendEmail sends a plain text email. Note that from must be a verified
+// address in the AWS control panel.
 func (c *Config) SendEmail(from, to, subject, body string) (string, error) {
 	data := make(url.Values)
 	data.Add("Action", "SendEmail")
@@ -51,6 +54,8 @@ func (c *Config) SendEmail(from, to, subject, body string) (string, error) {
 	return sesPost(data, c.Endpoint, c.AccessKeyID, c.SecretAccessKey)
 }
 
+// SendEmailHTML sends a HTML email. Note that from must be a verified address
+// in the AWS control panel.
 func (c *Config) SendEmailHTML(from, to, subject, bodyText, bodyHTML string) (string, error) {
 	data := make(url.Values)
 	data.Add("Action", "SendEmail")
@@ -64,6 +69,8 @@ func (c *Config) SendEmailHTML(from, to, subject, bodyText, bodyHTML string) (st
 	return sesPost(data, c.Endpoint, c.AccessKeyID, c.SecretAccessKey)
 }
 
+// SendRawEmail sends a raw email. Note that from must be a verified address
+// in the AWS control panel.
 func (c *Config) SendRawEmail(raw []byte) (string, error) {
 	data := make(url.Values)
 	data.Add("Action", "SendRawEmail")
@@ -157,7 +164,7 @@ func sesPost(data url.Values, endpoint, accessKeyID, secretAccessKey string) (st
 		log.Printf("error, status = %d", r.StatusCode)
 
 		log.Printf("error response: %s", resultbody)
-		return "", errors.New(fmt.Sprintf("error code %d. response: %s", r.StatusCode, resultbody))
+		return "", fmt.Errorf("error code %d. response: %s", r.StatusCode, resultbody)
 	}
 
 	return string(resultbody), nil
