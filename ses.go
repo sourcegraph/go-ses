@@ -35,7 +35,7 @@ type Config struct {
 // EnvConfig takes the access key ID and secret access key values from the environment variables
 // $AWS_ACCESS_KEY_ID and $AWS_SECRET_KEY, respectively.
 var EnvConfig = Config{
-	Endpoint:        "https://email.us-east-1.amazonaws.com",
+	Endpoint:        os.Getenv("AWS_SES_ENDPOINT"),
 	AccessKeyID:     os.Getenv("AWS_ACCESS_KEY_ID"),
 	SecretAccessKey: os.Getenv("AWS_SECRET_KEY"),
 }
